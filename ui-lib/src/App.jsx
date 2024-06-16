@@ -5,7 +5,8 @@ import './App.css'
 
 import {
   Input,
-} from '../'
+  Button
+} from '../lib'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -33,6 +34,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <Input />
+      <Button />
     </>
   )
 }

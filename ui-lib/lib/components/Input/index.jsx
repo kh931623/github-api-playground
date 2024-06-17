@@ -2,6 +2,7 @@ import { Description, Field, Input, Label } from '@headlessui/react'
 import clsx from 'clsx'
 
 function BaseInput({
+    className,
     label = 'Label',
     value,
     onChange,
@@ -9,7 +10,7 @@ function BaseInput({
     const onInputChange = (e) => onChange(e.target.value)
 
     return (
-        <div className="w-full max-w-md px-4 ">
+        <div className={`w-full max-w-md px-4 ${className}`}>
             <Field className="flex flex-col items-start">
                 <Label className="text-sm/6 font-medium">
                     {label}

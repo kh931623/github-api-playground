@@ -4,10 +4,15 @@ import {
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from 'tailwindcss';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    cssInjectedByJsPlugin(),
+  ],
   build: {
     lib: {
       entry: resolve(__dirname, 'lib/index.js'),
@@ -17,7 +22,7 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'react',
-        'react-dom'
+        'react-dom',
       ],
       output: {
         globals: {
@@ -28,5 +33,10 @@ export default defineConfig({
     },
     sourcemap: true,
     emptyOutDir: true,
-  }
+  },
+  css: {
+    postcss: {
+      plugins: [tailwindcss],
+    },
+  },
 })

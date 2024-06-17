@@ -1,38 +1,69 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {
+  useState,
+  useEffect,
+  useCallback,
+} from 'react'
 import './App.css'
+import {
+  debounce,
+} from 'lodash';
 
 import {
   Input,
+  Button
 } from 'ui-lib';
+import GithubService from 'github-service';
 
 function App() {
   const [count, setCount] = useState(0)
+  const [token, setToken] = useState('')
+  const [keyword, setKeyword] = useState('')
+
+  const showSearch = !!token
+
+  const gs = new GithubService(token)
+
+  const search = useCallback(debounce((keyword) => {
+    console.log(keyword)
+  }, 500), [])
+
+  useEffect(() => {
+    if (keyword) {
+      search(keyword)
+    }
+  }, [keyword])
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          <button onClick={() => gs.test()}>Hello</button>
+        </p>
+        <p className='border border-black'>
+          {token}
+        </p>
+        <p className='border border-black'>
+          {keyword}
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <Input />
+
+      <Input
+        label='JWT'
+        value={token}
+        onChange={setToken}
+      />
+
+      {showSearch &&
+        <Input
+          className="mt-3"
+          label='Search Text'
+          value={keyword}
+          onChange={setKeyword}
+        />
+      }
     </>
   )
 }

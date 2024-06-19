@@ -6,6 +6,7 @@ const RepoList = ({
     className,
     onStar,
     onUnstar,
+    onShowCommits,
 }) => {
     const handleButtonClick = (starred, index, owner, repo) => {
         if (starred) onUnstar(index, owner, repo)
@@ -37,6 +38,10 @@ const RepoList = ({
                             <span className='ml-2'>
                                 {starCount}
                             </span>
+                        </Button>
+
+                        <Button className="mt-2" onClick={() => onShowCommits(repo.owner, repo.name)}>
+                            Show Commits
                         </Button>
                     </div>
                 </div>

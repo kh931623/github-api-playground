@@ -42,9 +42,13 @@ function App() {
       <Button>
         children test
       </Button>
-      <Star
-        starred={true}
-      />
+      <Button>
+        <Star
+          starred={true}
+        />
+        <span className='ml-2'>14k</span>
+      </Button>
+
       <Star
         starred={false}
       />

@@ -1,3 +1,6 @@
+import Star from '../Star';
+import Button from '../Button';
+
 const RepoList = ({
     repos,
 }) => {
@@ -12,11 +15,18 @@ const RepoList = ({
                     <div className="col-span-3">
                         <img className="inline-block" src={repo.avatar_url} alt="author avatar" width="48" height="48" />
                         <span>
-                            {repo.name}
+                            {repo.full_name}
                         </span>
                     </div>
                     <div>
-                        {starCount}
+                        <Button>
+                            <Star
+                                starred={true}
+                            />
+                            <span className='ml-2'>
+                                {starCount}
+                            </span>
+                        </Button>
                     </div>
                 </div>
             </li>

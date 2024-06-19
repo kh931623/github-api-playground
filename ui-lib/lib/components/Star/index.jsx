@@ -9,7 +9,7 @@ const Star = ({
 
     return (
         <svg
-            className={cls}
+            className={`inline-block ${cls}`}
             width={width}
             height={height}
             viewBox="0 0 24 24"

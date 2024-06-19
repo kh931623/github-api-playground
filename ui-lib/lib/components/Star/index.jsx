@@ -3,9 +3,9 @@ const Star = ({
     height = 32,
     starred,
 }) => {
-    const cls = starred ?
-        'fill-yellow-400 stroke-yellow-400' :
-        'fill-none stroke-black'
+    const cls = starred
+        ? 'fill-yellow-400 stroke-yellow-400'
+        : 'fill-none stroke-black'
 
     return (
         <svg

@@ -19,7 +19,25 @@ class GithubService {
                 per_page: 10,
             })
 
-            return data
+            console.log(data);
+
+            return data.items.map(repo => {
+                const {
+                    full_name: name,
+                    id,
+                    stargazers_count,
+                    owner: {
+                        avatar_url
+                    },
+                } = repo
+
+                return {
+                    id,
+                    name,
+                    avatar_url,
+                    stargazers_count,
+                }
+            })
         } catch (error) {
             console.error(error);
             return []

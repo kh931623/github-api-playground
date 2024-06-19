@@ -29,14 +29,10 @@ function App() {
   const gs = new GithubService(token)
 
   const search = useCallback(debounce((keyword, gs) => {
-    console.log(keyword)
-
     gs.getRepos(keyword).then(setRepos)
   }, 500), [])
 
   const handleStar = async (index, owner, repo) => {
-    console.log('star', owner, repo);
-
     try {
       await gs.starRepo(owner, repo)
 
@@ -47,13 +43,11 @@ function App() {
         ], true, repos)
       })
     } catch (error) {
-      alert(`failed to star ${owner}/${repo}`)
+      alert(`Failed to star ${owner}/${repo}`)
     }
   }
 
   const handleUnstar = async (index, owner, repo) => {
-    console.log('unstar', owner, repo);
-
     try {
       await gs.starRepo(owner, repo)
 
@@ -64,7 +58,16 @@ function App() {
         ], false, repos)
       })
     } catch (error) {
-      alert(`failed to unstar ${owner}/${repo}`)
+      alert(`Failed to unstar ${owner}/${repo}`)
+    }
+  }
+
+  const handleShowCommits = async (owner, repo) => {
+    try {
+      const commits = await gs.getCommis(owner, repo)
+      alert(`Last 5 commits for ${owner}/${repo} \n ${commits.join('\n')}`)
+    } catch (error) {
+      alert(`Failed to show commits for ${owner}/${repo}`)
     }
   }
 
@@ -110,6 +113,7 @@ function App() {
         <RepoList
           onStar={handleStar}
           onUnstar={handleUnstar}
+          onShowCommits={handleShowCommits}
           className="mt-3"
           repos={repos}
         />

@@ -5,7 +5,8 @@ import './App.css'
 
 import {
   Input,
-  Button
+  Button,
+  Star,
 } from '../lib'
 
 function App() {
@@ -38,7 +39,15 @@ function App() {
         value={count}
         onChange={setCount}
       />
-      <Button />
+      <Button>
+        children test
+      </Button>
+      <Star
+        starred={true}
+      />
+      <Star
+        starred={false}
+      />
     </>
   )
 }

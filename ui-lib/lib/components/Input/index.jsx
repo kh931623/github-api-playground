@@ -19,6 +19,7 @@ function BaseInput({
                     className="mt-3 block w-full rounded-lg border border-black"
                     value={value}
                     onChange={onInputChange}
+                    autoComplete='off'
                 />
             </Field>
         </div>

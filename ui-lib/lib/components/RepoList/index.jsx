@@ -40,7 +40,7 @@ const RepoList = ({
                             </span>
                         </Button>
 
-                        <Button className="mt-2" onClick={() => onShowCommits(repo.owner, repo.name)}>
+                        <Button className="mt-2 ml-2" onClick={() => onShowCommits(repo.owner, repo.name)}>
                             Show Commits
                         </Button>
                     </div>

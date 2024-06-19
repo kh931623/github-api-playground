@@ -89,6 +89,16 @@ class GithubService {
             repo,
         })
     }
+
+    async getCommis(owner, repo) {
+        const { data } = await this.client.request('GET /repos/{owner}/{repo}/commits', {
+            owner,
+            repo,
+            per_page: 5
+        })
+
+        return data.map(commit => commit.sha)
+    }
 }
 
 export default GithubService

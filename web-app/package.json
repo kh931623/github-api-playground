@@ -12,6 +12,7 @@
   "dependencies": {
     "github-service": "file:../github-service",
     "lodash": "^4.17.21",
+    "ramda": "^0.30.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "ui-lib": "file:../ui-lib"

@@ -7,6 +7,9 @@ import './App.css'
 import {
   debounce,
 } from 'lodash';
+import {
+  assocPath,
+} from 'ramda';
 
 import {
   Input,
@@ -30,6 +33,40 @@ function App() {
 
     gs.getRepos(keyword).then(setRepos)
   }, 500), [])
+
+  const handleStar = async (index, owner, repo) => {
+    console.log('star', owner, repo);
+
+    try {
+      await gs.starRepo(owner, repo)
+
+      setRepos(repos => {
+        return assocPath([
+          index,
+          'starred'
+        ], true, repos)
+      })
+    } catch (error) {
+      alert(`failed to star ${owner}/${repo}`)
+    }
+  }
+
+  const handleUnstar = async (index, owner, repo) => {
+    console.log('unstar', owner, repo);
+
+    try {
+      await gs.starRepo(owner, repo)
+
+      setRepos(repos => {
+        return assocPath([
+          index,
+          'starred'
+        ], false, repos)
+      })
+    } catch (error) {
+      alert(`failed to unstar ${owner}/${repo}`)
+    }
+  }
 
   useEffect(() => {
     if (keyword) {
@@ -71,6 +108,9 @@ function App() {
 
       {showRepos &&
         <RepoList
+          onStar={handleStar}
+          onUnstar={handleUnstar}
+          className="mt-3"
           repos={repos}
         />
       }

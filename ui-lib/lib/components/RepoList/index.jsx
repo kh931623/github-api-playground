@@ -8,9 +8,9 @@ const RepoList = ({
     onUnstar,
     onShowCommits,
 }) => {
-    const handleButtonClick = (starred, index, owner, repo) => {
-        if (starred) onUnstar(index, owner, repo)
-        else onStar(index, owner, repo)
+    const handleButtonClick = (starred, index, owner, repo, starCount) => {
+        if (starred) onUnstar(index, owner, repo, starCount)
+        else onStar(index, owner, repo, starCount)
     }
 
     const listItems = repos.map((repo, index) => {
@@ -30,7 +30,7 @@ const RepoList = ({
                     </div>
                     <div>
                         <Button
-                            onClick={() => handleButtonClick(repo.starred, index, repo.owner, repo.name)}
+                            onClick={() => handleButtonClick(repo.starred, index, repo.owner, repo.name, repo.stargazers_count)}
                         >
                             <Star
                                 starred={repo.starred}

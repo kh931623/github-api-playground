@@ -18,7 +18,6 @@ import {
 import GithubService from 'github-service';
 
 function App() {
-  const [count, setCount] = useState(0)
   const [token, setToken] = useState('')
   const [keyword, setKeyword] = useState('')
   const [repos, setRepos] = useState([])
@@ -79,21 +78,6 @@ function App() {
 
   return (
     <>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          <button onClick={() => gs.test()}>Hello</button>
-        </p>
-        <p className='border border-black'>
-          {token}
-        </p>
-        <p className='border border-black'>
-          {keyword}
-        </p>
-      </div>
-
       <Input
         label='JWT'
         value={token}

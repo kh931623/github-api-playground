@@ -10,7 +10,7 @@ import {
 
 import {
   Input,
-  Button
+  RepoList,
 } from 'ui-lib';
 import GithubService from 'github-service';
 
@@ -18,18 +18,22 @@ function App() {
   const [count, setCount] = useState(0)
   const [token, setToken] = useState('')
   const [keyword, setKeyword] = useState('')
+  const [repos, setRepos] = useState([])
 
   const showSearch = !!token
+  const showRepos = !!repos.length
 
   const gs = new GithubService(token)
 
-  const search = useCallback(debounce((keyword) => {
+  const search = useCallback(debounce((keyword, gs) => {
     console.log(keyword)
+
+    gs.getRepos(keyword).then(setRepos)
   }, 500), [])
 
   useEffect(() => {
     if (keyword) {
-      search(keyword)
+      search(keyword, gs)
     }
   }, [keyword])
 
@@ -62,6 +66,12 @@ function App() {
           label='Search Text'
           value={keyword}
           onChange={setKeyword}
+        />
+      }
+
+      {showRepos &&
+        <RepoList
+          repos={repos}
         />
       }
     </>

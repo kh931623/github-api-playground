@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "octokit": "^4.0.2"
+    "octokit": "^4.0.2",
+    "ramda": "^0.30.1"
   }
 }

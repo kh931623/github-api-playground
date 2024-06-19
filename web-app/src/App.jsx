@@ -9,6 +9,7 @@ import {
 } from 'lodash';
 import {
   assocPath,
+  pipe,
 } from 'ramda';
 
 import {
@@ -31,30 +32,42 @@ function App() {
     gs.getRepos(keyword).then(setRepos)
   }, 500), [])
 
-  const handleStar = async (index, owner, repo) => {
+  const handleStar = async (index, owner, repo, starCount) => {
     try {
       await gs.starRepo(owner, repo)
 
       setRepos(repos => {
-        return assocPath([
-          index,
-          'starred'
-        ], true, repos)
+        return pipe(
+          assocPath([
+            index,
+            'starred'
+          ], true),
+          assocPath([
+            index,
+            'stargazers_count'
+          ], starCount + 1)
+        )(repos)
       })
     } catch (error) {
       alert(`Failed to star ${owner}/${repo}`)
     }
   }
 
-  const handleUnstar = async (index, owner, repo) => {
+  const handleUnstar = async (index, owner, repo, starCount) => {
     try {
-      await gs.starRepo(owner, repo)
+      await gs.unstarRepo(owner, repo)
 
       setRepos(repos => {
-        return assocPath([
-          index,
-          'starred'
-        ], false, repos)
+        return pipe(
+          assocPath([
+            index,
+            'starred'
+          ], false),
+          assocPath([
+            index,
+            'stargazers_count'
+          ], starCount - 1)
+        )(repos)
       })
     } catch (error) {
       alert(`Failed to unstar ${owner}/${repo}`)

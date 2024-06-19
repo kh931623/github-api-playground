@@ -1,10 +1,11 @@
 import { Button } from '@headlessui/react'
 
 function BaseButton({
-    children
+    children,
+    ...props
 }) {
     return (
-        <Button className="rounded bg-slate-200 py-2 px-4 text-sm text-black data-[hover]:bg-slate-400">
+        <Button {...props} className="rounded bg-slate-200 py-2 px-4 text-sm text-black data-[hover]:bg-slate-400">
             {children}
         </Button>
     )

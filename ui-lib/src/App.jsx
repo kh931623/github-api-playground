@@ -42,7 +42,9 @@ function App() {
       <Button>
         children test
       </Button>
-      <Button>
+      <Button
+        onClick={() => console.log('hey!')}
+      >
         <Star
           starred={true}
         />

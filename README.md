@@ -3,7 +3,7 @@ Github API Playground
 
 ## Purpose of this project
 - practice github API
-- try to use modern build tool(vite) to implement a js lib
+- try to implement a js lib
 - try to use modern build tool(vite) to implement a react component lib
 
 ## Project Structures
